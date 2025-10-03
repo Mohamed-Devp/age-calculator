@@ -67,10 +67,16 @@ input {
     font-size: 24px;
     font-weight: var(--bold);
     text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .2s ease-in;
 }
 
 input::placeholder {
     color: var(--grey-500);
+}
+
+input:hover, input:focus {
+    border-color: var(--purple-500);
 }
 
 .calculate {
@@ -97,6 +103,12 @@ input::placeholder {
     border-radius: 50%;
     line-height: 0;
     background-color: var(--purple-500);
+    cursor: pointer;
+    transition: background-color .2s ease-in;
+}
+
+.calculate button:hover {
+    background-color: black;
 }
 
 .calculate img {
