@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,400;1,800&display=swap');
+
+* {
+    margin: 0;
+    border: none;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Primary colors */
+    --purple-500: hsl(259, 100%, 65%);
+    --red-400: hsl(0, 100%, 67%);
+
+    /* Neutral colors */
+    --grey-100: hsl(0, 0%, 94%);
+    --grey-200: hsl(0, 0%, 86%);
+    --grey-500: hsl(0, 1%, 44%);
+
+    /* Fonts */
+    --primary-font: "Poppins";
+
+    --regular: 400;
+    --bold: 700;
+    --extra-bold: 800;
+}
+
+body {
+    display: grid;
+    place-content: center;
+    min-height: 100vh;
+    padding: 2rem 0;
+    font-family: var(--primary-font);
+    background-color: var(--grey-100);
+}
+
+main {
+    width: 650px;
+    padding: 40px;
+    border-radius: 20px 20px 150px 20px;
+    background-color: white;
+}
+
+.date {
+    display: flex;
+    gap: 24px;
+}
+
+.day, .month, .year {
+    width: 125px;
+}
+
+label {
+    font-size: 12px;
+    font-weight: var(--bold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--grey-500);
+}
+
+input {
+    width: 100%;
+    padding: 8px 1rem;
+    margin-top: 6px;
+    border: 1px solid var(--grey-200);
+    border-radius: 6px;
+    font-size: 24px;
+    font-weight: var(--bold);
+    cursor: pointer;
+    transition: border-color .2s ease-in;
+}
+
+input::placeholder {
+    text-transform: uppercase;
+    color: var(--grey-500);
+}
+
+input:hover, input:focus {
+    border-color: var(--purple-500);
+}
+
+.calculate {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.calculate::before { /* Separator */
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    z-index: 10;
+    transform: translateY(-50%);
+    background-color: var(--grey-200);
+}
+
+.calculate button {
+    z-index: 20;
+    padding: 1rem;
+    border-radius: 50%;
+    line-height: 0;
+    background-color: var(--purple-500);
+    cursor: pointer;
+    transition: background-color .2s ease-in;
+}
+
+.calculate button:hover {
+    background-color: black;
+}
+
+.calculate img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.age p {
+    font-size: 72px;
+    font-style: italic;
+    font-weight: var(--extra-bold);
+    line-height: 1.2;
+}
+
+.age span {
+    color: var(--purple-500);
+}
+
+@media (max-width: 700px) {
+    main {
+        width: min(490px, 90vw);
+        padding: 2rem;
+    }
+
+    .date {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .day, .month, .year {
+        width: 30%;
+    }
+
+    .calculate {
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    .calculate button {
+        padding: 20px;
+    }
+
+    .calculate img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .age p {
+        font-size: 56px;
+    }
+}
+
+@media (max-width: 450px) {
+    main {
+        border-radius: 20px 20px 100px 20px;
+    }
+
+    input {
+        font-size: 18px;
+        padding: 10px 1rem;
+    }
+
+    .calculate {
+        padding: 24px 0;
+    }
+
+    .calculate button {
+        padding: 1rem;
+    }
+
+    .age p {
+        font-size: 46px;
+    }
+}
+
+@media (max-width: 360px) {
+    input {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    .age p {
+        font-size: 36px;
+        line-height: 1.4;
+    }
+}
