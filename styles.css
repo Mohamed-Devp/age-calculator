@@ -29,7 +29,8 @@
 body {
     display: grid;
     place-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 2rem 0;
     font-family: var(--primary-font);
     background-color: var(--grey-100);
 }
@@ -63,15 +64,15 @@ input {
     padding: 8px 1rem;
     margin-top: 6px;
     border: 1px solid var(--grey-200);
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 24px;
     font-weight: var(--bold);
-    text-transform: uppercase;
     cursor: pointer;
     transition: border-color .2s ease-in;
 }
 
 input::placeholder {
+    text-transform: uppercase;
     color: var(--grey-500);
 }
 
@@ -126,4 +127,73 @@ input:hover, input:focus {
 
 .age span {
     color: var(--purple-500);
+}
+
+@media (max-width: 700px) {
+    main {
+        width: min(490px, 90vw);
+        padding: 2rem;
+    }
+
+    .date {
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .day, .month, .year {
+        width: 30%;
+    }
+
+    .calculate {
+        justify-content: center;
+        padding: 2rem 0;
+    }
+
+    .calculate button {
+        padding: 20px;
+    }
+
+    .calculate img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .age p {
+        font-size: 56px;
+    }
+}
+
+@media (max-width: 450px) {
+    main {
+        border-radius: 20px 20px 100px 20px;
+    }
+
+    input {
+        font-size: 18px;
+        padding: 10px 1rem;
+    }
+
+    .calculate {
+        padding: 24px 0;
+    }
+
+    .calculate button {
+        padding: 1rem;
+    }
+
+    .age p {
+        font-size: 46px;
+    }
+}
+
+@media (max-width: 360px) {
+    input {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    .age p {
+        font-size: 36px;
+        line-height: 1.4;
+    }
 }
