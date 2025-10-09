@@ -8,10 +8,13 @@ const daysOutputEl = document.querySelector('.days span');
 const monthsOutputEl = document.querySelector('.months span');
 const yearsOutputEl = document.querySelector('.years span');
 
-function calculateAge(birthDay, birthMonth, birthYear) {
-    const today = new Date();
-    const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+const errorMessage = {
+    day: 'Must be a valid day',
+    month: 'Must be a valid month',
+    year: 'Must be in the past'
+}
 
+function calculateAge(today, birthDate) {
     let ageYears = today.getFullYear() - birthDate.getFullYear();
     let ageMonths = today.getMonth() - birthDate.getMonth();
     let ageDays = today.getDate() - birthDate.getDate();
@@ -30,16 +33,68 @@ function calculateAge(birthDay, birthMonth, birthYear) {
     return { years: ageYears, months: ageMonths, days: ageDays }
 }
 
+function getInputElValue(inputEl, lo, hi) {
+    inputEl.classList.add('invalid');
+
+    const errorMsgOutputEl = inputEl.nextSibling.nodeType === Node.TEXT_NODE
+        ? inputEl.nextSibling.nextSibling
+        : inputEl.nextSibling;
+
+    const inputValStr = inputEl.value;
+    const inputValNum = Number(inputValStr);
+
+    // Missing value
+    if (!inputValStr.length) {
+        errorMsgOutputEl.textContent = 'This field is required';
+        return -1;
+    }
+
+    // Invalid value
+    if (!Number.isInteger(inputValNum) || inputValNum < lo || inputValNum > hi) {
+        errorMsgOutputEl.textContent = errorMessage[inputEl.id];
+        return -1;
+    }
+
+    errorMsgOutputEl.textContent = '';
+    inputEl.classList.remove('invalid');
+    return inputValNum;
+}
+
 function handleCalculateClick() {
-    const birthDay = Number(dayInputEl.value);
-    const birthMonth = Number(monthInputEl.value);
-    const birthYear = Number(yearInputEl.value);
+    const today = new Date();
 
-    const age = calculateAge(birthDay, birthMonth, birthYear);
+    const birthDay = getInputElValue(dayInputEl, 1, 31);
+    const birthMonth = getInputElValue(monthInputEl, 1, 12);
+    const birthYear = getInputElValue(yearInputEl, 0, today.getFullYear());
 
-    daysOutputEl.textContent = age.days;
-    monthsOutputEl.textContent = age.months;
-    yearsOutputEl.textContent = age.years;
+    if (birthDay !== -1 && birthMonth !== -1 && birthYear !== -1) {
+        const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+
+        const errorMsgOutputEl = dayInputEl.nextSibling.nodeType === Node.TEXT_NODE
+            ? dayInputEl.nextSibling.nextSibling
+            : dayInputEl.nextSibling;
+
+        if (birthDate.getDate() === birthDay) {
+            errorMsgOutputEl.textContent = '';
+
+            dayInputEl.classList.remove('invalid');
+            monthInputEl.classList.remove('invalid');
+            yearInputEl.classList.remove('invalid');
+
+            const age = calculateAge(today, birthDate);
+
+            daysOutputEl.textContent = age.days;
+            monthsOutputEl.textContent = age.months;
+            yearsOutputEl.textContent = age.years;
+
+        } else {
+            errorMsgOutputEl.textContent = 'Must be a valid date';
+
+            dayInputEl.classList.add('invalid');
+            monthInputEl.classList.add('invalid');
+            yearInputEl.classList.add('invalid');
+        }
+    }
 }
 
 calculateBtn.addEventListener('click', handleCalculateClick);

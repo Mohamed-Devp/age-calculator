@@ -59,10 +59,14 @@ label {
     color: var(--grey-500);
 }
 
+label:has(+.invalid) {
+    color: var(--red-400);
+}
+
 input {
     width: 100%;
     padding: 8px 1rem;
-    margin-top: 6px;
+    margin: 6px 0;
     border: 1px solid var(--grey-200);
     border-radius: 6px;
     font-size: 24px;
@@ -78,6 +82,17 @@ input::placeholder {
 
 input:hover, input:focus {
     border-color: var(--purple-500);
+}
+
+.invalid, .invalid:hover, .invalid:focus {
+    border-color: var(--red-400);
+}
+
+.error-message {
+    font-size: 10px;
+    font-weight: var(--regular);
+    font-style: italic;
+    color: var(--red-400);
 }
 
 .calculate {
